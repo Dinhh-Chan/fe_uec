@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sơ Đồ Trận Đấu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bracket-container">
+        <div class="bracket">
+            <!-- Vòng đấu bên trái (8 đội) -->
+            <div class="round">
+                <div class="match"><button class="team" onclick="chooseImage(this)">A1</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A2</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A3</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A4</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A5</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A6</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A7</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">A8</button></div>
+            </div>
+
+            <!-- Kết nối và ô tiếp theo (Tứ kết bên trái) -->
+            <div class="round">
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 1</button></div>
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 2</button></div>
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 3</button></div>
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 4</button></div>
+            </div>
+
+            <!-- Bán kết bên trái -->
+            <div class="round">
+                <div class="match middle_2"><button class="team" onclick="chooseImage(this)">Bán Kết 1</button></div>
+                <div class="match middle_2"><button class="team" onclick="chooseImage(this)">Bán Kết 2</button></div>
+            </div>
+            <div class="round">
+                <div class="match middle_3"><button class="team" onclick="chooseImage(this)">đội chung kết</button></div>
+            </div>
+
+            <!-- Trung tâm - Chung kết -->
+            <div class="center">
+                <div class="match_chungket"><button class="team" onclick="chooseImage(this)">Chung Kết</button></div>
+            </div>
+
+            <!-- Bán kết bên phải -->
+            <div class="round">
+                <div class="match middle_3"><button class="team" onclick="chooseImage(this)">đội chung kết</button></div>
+            </div>
+            <div class="round">
+                <div class="match middle_2"><button class="team" onclick="chooseImage(this)">Bán Kết 3</button></div>
+                <div class="match middle_2"><button class="team" onclick="chooseImage(this)">Bán Kết 4</button></div>
+            </div>
+
+            <!-- Kết nối và ô tiếp theo (Tứ kết bên phải) -->
+            <div class="round">
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 5</button></div>
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 6</button></div>
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 7</button></div>
+                <div class="match middle"><button class="team" onclick="chooseImage(this)">Tứ Kết 8</button></div>
+            </div>
+
+            <!-- Vòng đấu bên phải (8 đội) -->
+            <div class="round">
+                <div class="match"><button class="team" onclick="chooseImage(this)">B1</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B2</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B3</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B4</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B5</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B6</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B7</button></div>
+                <div class="match"><button class="team" onclick="chooseImage(this)">B8</button></div>
+            </div>
+        </div>
+        <svg id="connections"></svg>
+    </div>
+
+    <!-- File input để người dùng tải ảnh -->
+    <input type="file" id="fileInput" style="display:none" accept="image/*" onchange="handleFileSelect(event)">
+</body>
+<script>
+    let currentButton = null;
+
+    function chooseImage(button) {
+        currentButton = button;
+        document.getElementById('fileInput').click();
+    }
+
+    function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentButton.style.backgroundImage = `url(${e.target.result})`;
+                currentButton.style.backgroundSize = 'cover';
+                currentButton.style.color = 'transparent'; // Ẩn chữ để hiển thị ảnh rõ hơn
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+</html>
